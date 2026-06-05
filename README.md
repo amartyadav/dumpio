@@ -207,8 +207,3 @@ dumpDotInterpolate
 | Kernel-vs-reference comparison          | in progress |
 | HLS synthesis (SmartHLS)                | not started |
 | FPGA bitstream + host integration       | not started |
-
-## License
-
-See `LICENSE`. (Confirm copyright holder and license terms before publishing —
-this work may be subject to employer IP assignment.)
