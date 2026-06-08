@@ -5,8 +5,7 @@
 #include <fstream>
 #include <vector>
 
-
-void readBinary(const std::string& filename)
+BinaryOutputDS readBinary(const std::string& filename)
 {
     bool allTestsPass = true;
     std::cout << "Reading the OpenFOAM binary file" << std::endl;
@@ -163,4 +162,17 @@ void readBinary(const std::string& filename)
     std::cout << "Element Type: " << static_cast<int>(elementType) << std::endl;
     std::cout << "nFaces: " << nFaces << std::endl;
     std::cout << "nCells: " << nCells << std::endl;
+
+    // Adding data to the struct
+
+    BinaryOutputDS output = {
+        magicNumber, formatVersion, elementType, nFaces, nCells,
+        Sfx, Sfy, Sfz,
+        lambda,
+        Ux, Uy, Uz,
+        owner, neighbour,
+        phi_ref
+    };
+
+    return output;
 }
