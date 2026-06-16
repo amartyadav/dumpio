@@ -1,14 +1,15 @@
 #ifndef DUMPIO_LIBRARY_H
 #define DUMPIO_LIBRARY_H
+#include <cstdint>
 #include <string>
 #include <vector>
 typedef float real_t;
 
 struct BinaryOutputDS
 {
-    __uint32_t magicNumber{};
-    __uint8_t formatVersion;
-    __uint8_t elementType;
+    uint32_t magicNumber{};
+    uint8_t formatVersion;
+    uint8_t elementType;
     int32_t nFaces;
     int32_t nCells;
 
