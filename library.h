@@ -2,6 +2,7 @@
 #define DUMPIO_LIBRARY_H
 #include <string>
 #include <vector>
+typedef float real_t;
 
 struct BinaryOutputDS
 {
@@ -11,20 +12,20 @@ struct BinaryOutputDS
     int32_t nFaces;
     int32_t nCells;
 
-    std::vector<double> Sfx;
-    std::vector<double> Sfy;
-    std::vector<double> Sfz;
+    std::vector<real_t> Sfx;
+    std::vector<real_t> Sfy;
+    std::vector<real_t> Sfz;
 
-    std::vector<double> lambda;
+    std::vector<real_t> lambda;
 
-    std::vector<double> Ux;
-    std::vector<double> Uy;
-    std::vector<double> Uz;
+    std::vector<real_t> Ux;
+    std::vector<real_t> Uy;
+    std::vector<real_t> Uz;
 
     std::vector<int32_t> owner;
     std::vector<int32_t> neighbour;
 
-    std::vector<double> phi_ref;
+    std::vector<real_t> phi_ref;
 
 };
 
