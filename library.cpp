@@ -169,15 +169,33 @@ BinaryOutputDS readBinary(const std::string& filename)
     std::cout << "nFaces: " << nFaces << std::endl;
     std::cout << "nCells: " << nCells << std::endl;
 
+    // printing the problem cells plus two more cells:
+    const int bad_faces[] = {67, 113, 118, 214};
+
+    for (int idx : bad_faces) {
+        if (idx >= nFaces) continue;
+
+        std::cout << "\n=== FROM DUMPIO ===" << " ===\n";
+        std::cout << "\n=== Face " << idx << " ===\n";
+        std::cout << "owner[" << idx << "]     = " << owner[idx] << "\n";
+        std::cout << "neighbour[" << idx << "] = " << neighbour[idx] << "\n";
+        std::cout << "lambda[" << idx << "]    = " << lambda[idx] << "\n";
+        std::cout << "Sfx[" << idx << "]       = " << Sfx[idx] << "\n";
+        std::cout << "Sfy[" << idx << "]       = " << Sfy[idx] << "\n";
+        std::cout << "Sfz[" << idx << "]       = " << Sfz[idx] << "\n";
+        std::cout << "Ux[owner]     = " << Ux[owner[idx]] << "\n";
+        std::cout << "Ux[neighbour] = " << Ux[neighbour[idx]] << "\n";
+    }
+
     // Adding data to the struct
 
     BinaryOutputDS output = {
         magicNumber, formatVersion, elementType, nFaces, nCells,
-        Sfx, Sfy, Sfz,
-        lambda,
-        Ux, Uy, Uz,
+        std::vector<real_t>(Sfx.begin(), Sfx.end()), std::vector<real_t>(Sfy.begin(), Sfy.end()), std::vector<real_t>(Sfz.begin(), Sfz.end()),
+        std::vector<real_t>(lambda.begin(), lambda.end()),
+        std::vector<real_t>(Ux.begin(), Ux.end()), std::vector<real_t>(Uy.begin(), Uy.end()), std::vector<real_t>(Uz.begin(), Uz.end()),
         owner, neighbour,
-        phi_ref
+        std::vector<real_t>(phi_ref.begin(), phi_ref.end())
     };
 
     return output;
