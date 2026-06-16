@@ -1,6 +1,7 @@
 #include "library.h"
 
 #include <algorithm>
+#include <cstdint>
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -16,9 +17,9 @@ BinaryOutputDS readBinary(const std::string& filename)
     // Reading the Header
     // Declaring memory for header
 
-    __uint32_t magicNumber{};
-    __uint8_t formatVersion;
-    __uint8_t elementType;
+    uint32_t magicNumber{};
+    uint8_t formatVersion;
+    uint8_t elementType;
     int32_t nFaces;
     int32_t nCells;
 
