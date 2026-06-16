@@ -70,15 +70,17 @@ BinaryOutputDS readBinary(const std::string& filename)
     std::cout << "-- lambda -- : Bytes Read: " << ifs.gcount() << std::endl;
 
     // checking whether the range of lambda's elements is within [0,1]
-    if (auto max_element_lambda = std::ranges::max_element(lambda); *max_element_lambda > 1)
+    auto max_element_lambda = std::max_element(lambda.begin(), lambda.end());
+    if (max_element_lambda != lambda.end() && *max_element_lambda > 1)
     {
-        throw std::runtime_error("-- Lambda -- invalid, max is greater than 1.");
         allTestsPass = false;
+        //throw std::runtime_error("-- Lambda -- invalid, max is greater than 1.");
     }
-    if (auto min_element_lambda = std::ranges::min_element(lambda); *min_element_lambda < 0)
+    auto min_element_lambda = std::min_element(lambda.begin(), lambda.end());
+    if ( min_element_lambda != lambda.end() && *min_element_lambda < 0)
     {
-        throw std::runtime_error("-- Lambda -- invalid, min is lesser than 0.");
         allTestsPass = false;
+        // throw std::runtime_error("-- Lambda -- invalid, min is lesser than 0.");
     }
 
 
@@ -108,37 +110,41 @@ BinaryOutputDS readBinary(const std::string& filename)
     ifs.read(reinterpret_cast<char*>(owner.data()), nFaces * sizeof(int32_t));
     std::cout << "-- owner -- : Bytes Read: " << ifs.gcount() << std::endl;
 
-    if (auto max_element_owner = std::ranges::max_element(owner); *max_element_owner >= nCells)
+    auto max_element_owner = std::max_element(owner.begin(), owner.end());
+    if (max_element_owner != owner.end() && *max_element_owner >= nCells)
     {
-        throw std::runtime_error("-- owner -- invalid, max is greater than nCells.");
         allTestsPass = false;
+        // throw std::runtime_error("-- owner -- invalid, max is greater than nCells.");
     }
-    if (auto min_element_owner = std::ranges::min_element(owner); *min_element_owner < 0)
+    auto min_element_owner = std::min_element(owner.begin(), owner.end());
+    if (min_element_owner != owner.end() && *min_element_owner < 0)
     {
-        throw std::runtime_error("-- owner -- invalid, min is lesser than 0.");
         allTestsPass = false;
+        // throw std::runtime_error("-- owner -- invalid, min is lesser than 0.");
     }
 
 
     ifs.read(reinterpret_cast<char*>(neighbour.data()), nFaces * sizeof(int32_t));
     std::cout << "-- neighbour -- : Bytes Read: " << ifs.gcount() << std::endl;
 
-    if (auto max_element_neighbour = std::ranges::max_element(owner); *max_element_neighbour >= nCells)
+    auto max_element_neighbour = std::max_element(neighbour.begin(), neighbour.end());
+    if (max_element_neighbour != neighbour.end() && *max_element_neighbour >= nCells)
     {
-        throw std::runtime_error("-- owner -- invalid, max is greater than nCells.");
         allTestsPass = false;
+        // throw std::runtime_error("-- neighbour -- invalid, max is greater than nCells.");
     }
-    if (auto min_element_neighbour = std::ranges::min_element(neighbour); *min_element_neighbour < 0)
+    auto min_element_neighbour = std::min_element(neighbour.begin(), neighbour.end());
+    if (min_element_neighbour != neighbour.end() && *min_element_neighbour < 0)
     {
-        throw std::runtime_error("-- neighbour -- invalid, min is lesser than 0.");
         allTestsPass = false;
+        // throw std::runtime_error("-- neighbour -- invalid, min is lesser than 0.");
     }
 
     for (size_t i = 0; i < nFaces; i++)
     {
         if (owner.data()[i] > neighbour.data()[i])
         {
-            throw std::runtime_error("-- owner -- invalid, owner[i] is not < (less than) neighbour[i].");
+            // throw std::runtime_error("-- owner -- invalid, owner[i] is not < (less than) neighbour[i].");
             allTestsPass = false;
         }
     }
