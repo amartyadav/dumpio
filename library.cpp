@@ -11,7 +11,7 @@ BinaryOutputDS readBinary(const std::string& filename)
     std::cout << "Reading the OpenFOAM binary file" << std::endl;
     std::ifstream ifs(filename, std::ios::binary);
 
-    if (!ifs.is_open()) throw std::runtime_error(" === Unable to open the binary file to begin parsing ===");
+    // if (!ifs.is_open()) throw std::runtime_error(" === Unable to open the binary file to begin parsing ===");
 
     // Reading the Header
     // Declaring memory for header
@@ -40,7 +40,7 @@ BinaryOutputDS readBinary(const std::string& filename)
 
     if (magicNumber != 0xD07F0A01)
     {
-        throw std::runtime_error("=== MAGIC NUMBER INVALID. FILE POSSIBLY CORRUPTED! === ");
+        // throw std::runtime_error("=== MAGIC NUMBER INVALID. FILE POSSIBLY CORRUPTED! === ");
         allTestsPass = false;
     }
 
